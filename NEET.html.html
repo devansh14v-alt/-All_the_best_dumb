@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Siyua - NEET Success Journey</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.wrapper {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.container {
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  min-height: 500px;
+}
+
+.header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.header h1 {
+  font-size: 2.2em;
+  margin-bottom: 5px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.name-highlight {
+  display: inline-block;
+  font-size: 2.8em;
+  font-weight: 900;
+  background: linear-gradient(45deg, #ffd89b, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 10px;
+  animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% { filter: drop-shadow(0 0 5px rgba(255,255,255,0.3)); }
+  50% { filter: drop-shadow(0 0 15px rgba(255,255,255,0.6)); }
+}
+
+.header p {
+  font-size: 1em;
+  opacity: 0.95;
+  font-style: italic;
+}
+
+.tabs {
+  display: flex;
+  background: #f8f9ff;
+  border-bottom: 2px solid #e0e0e0;
+  overflow-x: auto;
+  gap: 0;
+}
+
+.tab-button {
+  flex: 1;
+  min-width: 100px;
+  padding: 15px 20px;
+  border: none;
+  background: transparent;
+  color: #667eea;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.95em;
+  transition: all 0.3s ease;
+  position: relative;
+  white-space: nowrap;
+}
+
+.tab-button:hover {
+  background: rgba(102, 126, 234, 0.08);
+  color: #764ba2;
+}
+
+.tab-button.active {
+  color: #764ba2;
+  background: white;
+}
+
+.tab-button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+.tab-content {
+  display: none;
+  padding: 35px;
+  animation: fadeIn 0.3s ease;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.welcome-card {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+  border-left: 5px solid #667eea;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  line-height: 1.8;
+  font-size: 1.05em;
+  color: #333;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, #667eea15, #764ba215);
+  padding: 20px;
+  border-radius: 14px;
+  text-align: center;
+  border: 1.5px solid #667eea40;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+}
+
+.stat-number {
+  font-size: 2em;
+  font-weight: 800;
+  color: #667eea;
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  font-size: 0.9em;
+  color: #666;
+  font-weight: 600;
+}
+
+.quote-box {
+  background: linear-gradient(135deg, #ffd89b, #ffb347);
+  color: #333;
+  padding: 25px;
+  border-radius: 14px;
+  text-align: center;
+  margin-bottom: 25px;
+  font-style: italic;
+  font-size: 1.05em;
+  line-height: 1.7;
+  font-weight: 500;
+  box-shadow: 0 8px 20px rgba(255, 184, 155, 0.3);
+}
+
+.tips-section h3, .journey-title, .study-title {
+  color: #667eea;
+  margin-bottom: 20px;
+  font-size: 1.4em;
+  font-weight: 700;
+}
+
+.tip-item {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 18px;
+  padding: 15px;
+  background: #f8f9ff;
+  border-radius: 10px;
+  border-left: 4px solid #667eea;
+  transition: all 0.3s ease;
+}
+
+.tip-item:hover {
+  background: #f0f2ff;
+  transform: translateX(5px);
+}
+
+.tip-icon {
+  color: #667eea;
+  font-weight: bold;
+  font-size: 1.3em;
+  min-width: 30px;
+  text-align: center;
+}
+
+.tip-text {
+  color: #555;
+  line-height: 1.6;
+}
+
+.journey-item {
+  margin-bottom: 25px;
+  padding: 20px;
+  background: #f8f9ff;
+  border-radius: 12px;
+  border-left: 5px solid #764ba2;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.journey-item:hover {
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.15);
+  transform: translateY(-2px);
+}
+
+.journey-item h4 {
+  color: #667eea;
+  margin-bottom: 12px;
+  font-weight: 700;
+  font-size: 1.15em;
+}
+
+.journey-item p {
+  color: #555;
+  line-height: 1.8;
+  font-size: 0.98em;
+}
+
+.journey-highlight {
+  color: #764ba2;
+  font-weight: 600;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 25px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  flex: 1;
+  min-width: 120px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+  background: #f0f0f0;
+  color: #667eea;
+  border: 2px solid #667eea;
+}
+
+.btn-secondary:hover {
+  background: #667eea;
+  color: white;
+}
+
+.countdown-box {
+  background: linear-gradient(135deg, #667eea15, #764ba215);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 20px;
+  border: 2px solid #667eea40;
+}
+
+.countdown-label {
+  font-size: 0.9em;
+  color: #667eea;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.countdown-timer {
+  font-size: 2.2em;
+  font-weight: 900;
+  color: #764ba2;
+}
+
+.footer {
+  background: linear-gradient(135deg, #667eea10, #764ba210);
+  padding: 25px;
+  text-align: center;
+  color: #667eea;
+  font-weight: 600;
+  border-top: 2px solid #e0e0e0;
+  font-size: 1em;
+}
+
+.heart {
+  display: inline-block;
+  animation: beat 0.6s infinite;
+  margin: 0 5px;
+}
+
+@keyframes beat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+}
+
+.motivational-text {
+  color: #667eea;
+  font-weight: 600;
+  margin-top: 15px;
+  padding: 15px;
+  background: #fff9e6;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.pride-badge {
+  background: linear-gradient(135deg, #ffd89b, #ffb347);
+  color: #333;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 20px 0;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(255, 184, 155, 0.3);
+}
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+  <div class="container">
+    <div class="header">
+      <h1>✨ All The Best ✨</h1>
+      <div class="name-highlight">SIYUA</div>
+      <p>Your NEET Success Journey</p>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-button active" onclick="switchTab('home')">
+        <span>🏠 Home</span>
+      </button>
+      <button class="tab-button" onclick="switchTab('journey')">
+        <span>🚀 Journey</span>
+      </button>
+      <button class="tab-button" onclick="switchTab('tips')">
+        <span>💡 Tips</span>
+      </button>
+      <button class="tab-button" onclick="switchTab('motivation')">
+        <span>💪 Motivation</span>
+      </button>
+    </div>
+
+    <!-- HOME TAB -->
+    <div id="home" class="tab-content active">
+      <div class="welcome-card">
+        Hi Siyua! 👋 I'm so incredibly proud of you. Every page you've read, every concept you've mastered, every sleepless night - it has all been building your foundation for success. You are ready, and you are going to ace this exam!
+      </div>
+
+      <div class="countdown-box">
+        <div class="countdown-label">Time Until NEET Exam</div>
+        <div class="countdown-timer" id="daysLeft">Counting down...</div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">13 Years</div>
+          <div class="stat-label">Of Dedication</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">∞</div>
+          <div class="stat-label">My Belief in You</div>
+        </div>
+      </div>
+
+      <div class="quote-box">
+        "The expert in anything was once a beginner." Your journey from questioning to conquering starts now, Siyua. You've proven you have what it takes!
+      </div>
+
+      <div class="button-group">
+        <button class="btn btn-primary" onclick="showMotivation()">Click for Extra Boost</button>
+        <button class="btn btn-secondary" onclick="switchTab('motivation')">Read Stories</button>
+      </div>
+
+      <div id="motivationBox" style="display: none;" class="motivational-text">
+        🌟 Siyua, you are not just preparing for an exam - you are shaping your future as a compassionate doctor! Every moment invested brings you closer to your dream. You've got this! 🌟
+      </div>
+    </div>
+
+    <!-- JOURNEY TAB -->
+    <div id="journey" class="tab-content">
+      <h3 class="journey-title">Your Beautiful Journey 🚀</h3>
+      
+      <div class="journey-item">
+        <h4>📚 The Beginning - Leaving School Behind</h4>
+        <p>Do you remember when you made that big decision to leave school for your stream? I remember us both feeling a mix of emotions. Neither of us were entirely happy about it at first - it felt like you were leaving behind so much. But looking back now, that was the moment everything changed. <span class="journey-highlight">That decision to step out of your comfort zone was the beginning of your incredible journey.</span> And honestly, who would've thought that the person I knew would transform into someone so incredibly studious? You surprised us all, Siyua. You proved that change can be beautiful.</p>
+      </div>
+
+      <div class="journey-item">
+        <h4>🎓 The Aakash Chapter - Where Dreams Started Taking Shape</h4>
+        <p>When you took admission at Aakash, you stepped into a world that demanded everything from you. And you didn't just meet that demand - you exceeded it. For two solid years, you put in the work. <span class="journey-highlight">Hour after hour, day after day, you pushed yourself harder than I thought possible.</span> The dedication you showed during those two years laid the foundation for everything that was to come. You were consistent, determined, and absolutely relentless in your pursuit of excellence.</p>
+      </div>
+
+      <div class="journey-item">
+        <h4>⚡ The Unexpected Setback - Paper Leak and Your Resilience</h4>
+        <p>And then came that moment nobody was prepared for. The paper got leaked. The dream you had been working towards for two years suddenly felt uncertain. You had to start again. <span class="journey-highlight">But Siyua, what you did next showed your true character.</span> Instead of breaking down, you picked yourself up and started preparing all over again. That's not just determination - that's true strength.</p>
+      </div>
+
+      <div class="journey-item">
+        <h4>💪 The Second Round - Your Greatest Test of Character</h4>
+        <p>The second time around was even harder. <span class="journey-highlight">The early mornings started getting darker, the classes felt longer, and the pressure multiplied.</span> But you didn't just survive - you thrived. You balanced everything that life threw at you. Full-day classes, studying, managing your personal life, dealing with disappointment from the first attempt... and yet, you showed up every single day with determination in your eyes.</p>
+      </div>
+
+      <div class="pride-badge">
+        ✨ Siyua, I am SO INCREDIBLY PROUD of you. The way you managed those long hours of classes throughout the entire day, the way you studied relentlessly, the way you balanced everything - it was a HUGE task, and you managed it pretty much perfectly. I really admire you for this. Your resilience is inspiring. ✨
+      </div>
+
+      <div class="journey-item">
+        <h4>🌟 Why This Journey Matters</h4>
+        <p>Siyua, your journey isn't just about NEET anymore. It's about showing yourself and the world what you're made of. You came back from failure. You didn't give up when life threw challenges at you. You studied while managing exhaustion, disappointment, and doubt. <span class="journey-highlight">That's not just preparation for a medical entrance exam - that's building the character of a true doctor.</span> The qualities you're developing now - resilience, determination, compassion through struggle - these are what will make you an amazing physician someday.</p>
+      </div>
+
+      <div class="journey-item">
+        <h4>🏆 The Final Stretch - You're Almost There!</h4>
+        <p>Now you're here. At the finish line. All those 2AM study sessions, all those sacrifices, all those moments when you wanted to give up but didn't - they've all brought you to this point. You are <span class="journey-highlight">absolutely, completely, and utterly ready for this exam.</span> Trust yourself, trust your preparation, and trust the incredible person you've become through this journey.</p>
+      </div>
+    </div>
+
+    <!-- TIPS TAB -->
+    <div id="tips" class="tab-content">
+      <h3 class="tips-section">Smart Study & Exam Tips 💡</h3>
+      
+      <div class="tip-item">
+        <div class="tip-icon">✓</div>
+        <div class="tip-text"><strong>Read Carefully:</strong> Spend 20-30 seconds understanding each question before attempting. NEET tests comprehension, not speed alone.</div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-icon">✓</div>
+        <div class="tip-text"><strong>Time Management:</strong> Allocate roughly 60 mins each for Biology, Chemistry, and Physics. Prioritize sections where you're stronger.</div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-icon">✓</div>
+        <div class="tip-text"><strong>Skip Strategically:</strong> Don't waste time on extremely difficult questions initially. Solve easier ones first, then return to challenging ones.</div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-icon">✓</div>
+        <div class="tip-text"><strong>Avoid Negative Marking:</strong> Since NEET has negative marking, be sure before marking answers. Educated guesses are okay, but not blind attempts.</div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-icon">✓</div>
+        <div class="tip-text"><strong>Stay Calm:</strong> If you feel stuck, take 3 deep breaths and move to the next question. Panic is your enemy, not the exam.</div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-icon">✓</div>
+        <div class="tip-text"><strong>Review Time:</strong> Use last 10-15 minutes to verify marked answers. Fix any calculation errors you spot.</div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-icon">✓</div>
+        <div class="tip-text"><strong>Physical Health:</strong> Get 7-8 hours of sleep the night before. Your brain needs rest to function optimally.</div>
+      </div>
+    </div>
+
+    <!-- MOTIVATION TAB -->
+    <div id="motivation" class="tab-content">
+      <h3 class="tips-section">Believe in Yourself 💪</h3>
+      
+      <div class="quote-box" style="margin-bottom: 20px;">
+        "Siyua, your potential is limitless. Every challenge you've overcome, every concept you've mastered, every setback you've bounced back from - they're all stepping stones to greatness."
+      </div>
+
+      <div class="journey-item">
+        <h4>🌟 Why You'll Succeed</h4>
+        <p><span class="journey-highlight">Your Dedication:</span> The number of hours you've put in shows your commitment. <span class="journey-highlight">Your Strategy:</span> You're not just studying hard, you're studying smart. <span class="journey-highlight">Your Heart:</span> Your dream of becoming a doctor comes from a place of passion - that's your superpower! <span class="journey-highlight">Your Resilience:</span> You came back after a setback that would have broken most people. That shows true strength.</p>
+      </div>
+
+      <div class="journey-item">
+        <h4>💫 On Exam Day</h4>
+        <p>When you sit in that examination hall, remember: <span class="journey-highlight">Every successful doctor once sat where you're sitting.</span> They felt nervous. They felt the pressure. But they conquered it. And so will you, Siyua. Your preparation is complete. Your mind is ready. Your spirit is willing. Your character is strong. Trust yourself completely!</p>
+      </div>
+
+      <div class="journey-item">
+        <h4>🎓 Your Future</h4>
+        <p>This exam is temporary. Your career is forever. Whether this is a step towards your first attempt or your final one, you're building resilience, determination, and medical knowledge that no exam can take away from you. You're going to be an amazing doctor, Siyua! The qualities you've shown through this journey - courage, perseverance, humility, and strength - are exactly what the world needs in a physician.</p>
+      </div>
+
+      <div class="journey-item">
+        <h4>❤️ A Personal Note</h4>
+        <p>I'm not rooting for you because I have to. I'm rooting for you because I genuinely, deeply believe in your capabilities. Your intelligence, your work ethic, your character, your ability to bounce back from adversity - these are the things that will make you succeed, not just in NEET, but in life. I've watched you grow from someone uncertain about leaving school to someone so incredibly focused and determined. That growth is real, and it's inspiring. Go show the world what Siyua is made of! I believe in you more than you believe in yourself right now - and that's saying something!</p>
+      </div>
+
+      <div style="text-align: center; margin-top: 25px; font-size: 1.5em;">
+        <span class="heart">❤️</span> You've Got This! <span class="heart">❤️</span>
+      </div>
+    </div>
+
+    <div class="footer">
+      With all my love, support, and unwavering belief in you <span class="heart">💕</span>
+    </div>
+  </div>
+</div>
+
+<script>
+function switchTab(tabName) {
+  // Hide all tabs
+  const tabs = document.querySelectorAll('.tab-content');
+  tabs.forEach(tab => tab.classList.remove('active'));
+  
+  // Remove active class from all buttons
+  const buttons = document.querySelectorAll('.tab-button');
+  buttons.forEach(btn => btn.classList.remove('active'));
+  
+  // Show selected tab and activate button
+  document.getElementById(tabName).classList.add('active');
+  event.target.closest('.tab-button').classList.add('active');
+  
+  // Calculate countdown on home tab
+  if (tabName === 'home') {
+    calculateDays();
+  }
+}
+
+function calculateDays() {
+  const examDate = new Date('2026-06-21T14:00:00').getTime();
+  const now = new Date().getTime();
+
+  const distance = examDate - now;
+  const countdownElement = document.getElementById('daysLeft');
+
+  if (distance <= 0) {
+    countdownElement.textContent = 'NEET has begun. Trust your preparation. Go conquer it, Siyua ❤️';
+    return;
+  }
+
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  countdownElement.textContent =
+    `${days}d ${hours}h ${minutes}m ${seconds}s ⏳`;
+}
+
+function showMotivation() {
+  const box = document.getElementById('motivationBox');
+  box.style.display = box.style.display === 'none' ? 'block' : 'none';
+}
+
+// Initialize countdown on page load
+window.addEventListener('load', () => {
+  calculateDays();
+  setInterval(calculateDays, 1000);
+});
+</script>
+
+</body>
+</html>
